@@ -1,0 +1,350 @@
+/* ================================================================== *\
+   Typography ($typography)
+
+   Modular scale:    16px @ 1:1.333 (perfect fourth)
+   Important number: 24px (base line-height)
+   http://modularscale.com/scale/?px1=16&px2=24&ra1=1.333&ra2=0
+\* ================================================================== */
+
+/**
+ * 1. Inherits percentage declared on above <html> as root `font-size`
+ * 2. Unitless `line-height`, which acts as multiple of base `font-size`
+ */
+
+body {
+	color: $base-font-color;
+	font-size: $base-font-size;     /* 1 */
+	font-family: $base-font-family;
+	font-weight: $base-font-weight;
+	line-height: $base-line-height; /* 2 */
+}
+
+
+/**
+ * Links ($links)
+\* -------------------------------------------------------------- */
+
+a {
+	color: $base-link-color;
+	text-decoration: none;
+
+	@include transition(color .2s ease);
+
+	&:hover {
+		color: $base-link-hover-color;
+	}
+
+	&:focus {
+		outline: 1px dotted $black;
+	}
+}
+
+/**
+ * Common typographical elements
+\* -------------------------------------------------------------- */
+
+abbr,
+acronym,
+dfn[title] {
+	cursor: help;
+}
+
+abbr a {
+	text-decoration: none;
+}
+
+acronym {
+	text-transform: uppercase;
+}
+
+blockquote {
+	padding-left: u($base-rem-unit);
+	border-left: $blockquote-border-width solid $gray-lighter;
+	font-style: italic;
+	font-size: $blockquote-font-size;
+	font-family: $blockquote-font-family;
+
+	p {
+		margin: 0;
+
+		+ p {
+			margin-top: u($base-rem-unit);
+		}
+	}
+
+	cite {
+		color: $gray-darker;
+		font-style: italic;
+		font-size: u(0.75rem);
+		font-family: $base-font-family;
+
+		/**
+		 * 1. Add an m-dash character before the <footer> tag
+		 * TIP: Use <cite> inside blockquotes - http://cbrac.co/18LWCOw
+		 */
+
+		&:before {
+			content: "\2014 \0020"; /* 1 */
+		}
+
+		a {
+			color: $gray-darker;
+		}
+	}
+}
+
+/**
+ * Add word wrapping and hyphenation to common elements
+\* -------------------------------------------------------------- */
+
+caption,
+p,
+table,
+textarea,
+td,
+th {
+	word-wrap: break-word;
+	hyphens: auto;
+}
+
+/**
+ * The parent of every `.crossbars` element must have `overflow:
+ * hidden` to prevent pseudo elements from breaking outside
+\* -------------------------------------------------------------- */
+
+.crossbars {
+	position: relative;
+	display: table;
+	margin: 0 auto u(0.75rem);
+	padding: 0 u($base-rem-unit);
+	width: auto;
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: u(0.125rem);
+	font-size: u(1.125rem);
+	line-height: 1.125;
+
+	&:before,
+	&:after {
+		position: absolute;
+		top: 50%;
+		display: block;
+		overflow: hidden;
+		margin-top: -(u(0.5rem));
+		width: 9999%;
+		height: u($base-rem-unit);
+		background: $gray-light;
+		content: " ";
+	}
+
+	&:before { left: -9999%;  }
+	&:after  { right: -9999%; }
+}
+
+dl {
+	dt {
+		color: $black;
+		font-weight: 600;
+	}
+
+	dd {
+		margin: 0;
+	}
+}
+
+del {
+	color: $gray-darker;
+	text-decoration: line-through;
+}
+
+details {
+	cursor: pointer;
+}
+
+.drop-cap {
+	&:first-letter {
+		float: left;
+		margin-right: u(0.75rem);
+		color: $black;
+		text-transform: uppercase;
+		font-weight: $heading-font-weight;
+		font-size: u(4.209rem);
+		font-family: $blockquote-font-family;
+		line-height: 1;
+	}
+}
+
+em,
+i,
+cite {
+	font-style: italic;
+}
+
+/**
+ * Headings ($headings)
+ * NOTE: Use `text-rendering` with caution - http://cbrac.co/SJt8p1
+\* -------------------------------------------------------------- */
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+	margin: 0 0 u(0.75rem);
+	color: $black;
+	font-weight: $heading-font-weight;
+	font-family: $heading-font-family;
+	line-height: $heading-line-height;
+	text-rendering: optimizeLegibility;
+}
+
+h1, .h1 { font-size: u(2rem); }
+h2, .h2 { font-size: u(1.25rem); }
+h3, .h3 { font-size: u(1.125rem); }
+h4, .h4 { font-size: u(0.75rem); }
+
+h5, .h5,
+h6, .h6 { font-size: $base-font-size; }
+
+/*
+@include breakpoint(small) {
+	h1, .h1 { font-size: u(3.157rem); }
+	h2, .h2 { font-size: u(2.369rem); }
+	h3, .h3 { font-size: u(1.333rem); }
+	h4, .h4 { font-size: u(1.125rem); }
+
+	h5, .h5,
+	h6, .h6 { font-size: $base-font-size; }
+}
+
+@include breakpoint(medium) {
+	h1, .h1 { font-size: u(4.209rem); }
+}
+*/
+
+hr {
+	margin: u($base-rem-unit) 0;
+	border: 0;
+	border-bottom: 1px solid $gray;
+
+	&.symbol {
+		margin: 0 0 u($base-rem-unit);
+		padding: u($base-rem-unit) 0;
+		height: u(1.333rem);
+		border: 0;
+
+		&:before {
+			display: block;
+			width: 100%;
+			border: 0;
+			color: $black;
+			content: "⁂";
+			text-align: center;
+			font-size: u(1.333rem);
+			line-height: 1;
+		}
+	}
+}
+
+/* Address styling not present in IE 8/9 */
+ins,
+mark {
+	background: #ff9;
+	color: $black;
+	text-decoration: none;
+}
+
+nav ul,
+nav ol {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+/* Nested `list-style` types for ordered lists */
+ol          { list-style: decimal;     }
+ol ol       { list-style: upper-alpha; }
+ol ol ol    { list-style: lower-roman; }
+ol ol ol ol { list-style: lower-alpha; }
+
+ol ol,
+ol ul,
+ul ul,
+ul ol {
+	margin-bottom: 0;
+}
+
+.run-in {
+	float: left;
+	margin: 0;
+	margin-right: u(0.317rem);
+	color: $black;
+	text-transform: uppercase;
+	letter-spacing: u(0.125rem);
+	font-weight: 700;
+	font-size: $base-font-size;
+}
+
+/* 1. Address inconsistent and variable `font-size` in all browsers */
+small {
+	@include inline-block;
+	font-size: u(0.875rem); /* 1 */
+	line-height: 1.333;
+}
+
+.small-caps {
+	text-transform: uppercase;
+	letter-spacing: u(0.125rem);
+	font-weight: 700;
+	font-size: u(1.125rem);
+	font-family: inherit;
+	line-height: inherit;
+}
+
+sub,
+sup {
+	font-size: u(0.75rem);
+}
+
+sup {
+	top: u(-0.475rem);
+}
+
+sub {
+	bottom: u(-0.238rem);
+}
+
+/**
+ * Text alignment ($text-alignment)
+\* -------------------------------------------------------------- */
+
+.text-left    { text-align: left;    }
+.text-right   { text-align: right;   }
+.text-center  { text-align: center;  }
+.text-justify { text-align: justify; }
+
+/* Medium-sized breakpoint */
+@include breakpoint(medium) {
+	.medium-text-left    { text-align: left;    }
+	.medium-text-right   { text-align: right;   }
+	.medium-text-center  { text-align: center;  }
+	.medium-text-justify { text-align: justify; }
+}
+
+/* Large-sized breakpoint */
+@include breakpoint(large) {
+	.large-text-left    { text-align: left;    }
+	.large-text-right   { text-align: right;   }
+	.large-text-center  { text-align: center;  }
+	.large-text-justify { text-align: justify; }
+}
+
+/**
+ * Font-weights
+\* -------------------------------------------------------------- */
+
+strong,
+.strong {
+	font-weight: 600;
+}

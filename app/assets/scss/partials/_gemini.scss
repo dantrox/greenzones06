@@ -1,0 +1,492 @@
+/* ================================================================== *\
+   Gemini ($main)
+\* ================================================================== */
+
+/**
+ * Overrides
+\* -------------------------------------------------------------- */
+
+.wrapper {
+	width: $body-min-width;
+	@include breakpoint(small) {
+		width: $grid-breakpoint-small;
+	}
+	@include breakpoint(medium) {
+		width: $grid-breakpoint-medium;
+	}
+	@include breakpoint(large) {
+		width: $grid-breakpoint-large;
+	}
+}
+
+h4 {
+	line-height: 1;
+	text-transform: uppercase;
+	border-bottom: 1px solid $gray-light;
+	padding-left: 10px;
+	padding-bottom: 6px;
+	margin-top: 10px;
+	@include box-shadow(0 1px 0 rgba($white,.8));
+}
+
+body {
+	background: $gray-lightest;
+}
+
+/**
+ * Header
+\* -------------------------------------------------------------- */
+
+body {
+	> header {
+		//transition: all .25s ease-in-out;
+		position: fixed;
+		top: 0;
+		left: 0;
+		overflow: hidden;
+		width: 100%;
+		background: $gray-lightest url(../img/bg.png) center center fixed;
+		@include background-size(contain);
+	}
+}
+
+/**
+ * Logo
+\* -------------------------------------------------------------- */
+
+.logo {
+	position: relative;
+	width: 300px;
+	height: 360px;
+	top: 50%;
+	margin: -210px auto 0;
+	background: url(../img/gz_logo_1x.png) no-repeat;
+	@include background-size(300px 360px);
+	@include breakpoint(retina) {
+		background-image: url(../img/gz_logo_2x.png);
+	}
+	z-index: 20;
+	a {
+		text-indent: -9999px;
+		display: block;
+		position: absolute;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.logo_parallax {
+	position: relative;
+	width: 300px;
+	height: 360px;
+	top: 50%;
+	margin: -210px auto 0;
+	z-index: 20;
+}
+
+.layer {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 100%;
+	height: 100%;
+	> span {
+		position: relative;
+		display: block;
+		background: url(../img/logo_sprite_1x.png) no-repeat;
+		@include background-size(300px 300px);
+		@include breakpoint(retina) {
+			background-image: url(../img/logo_sprite_2x.png);
+		}
+	}
+}
+
+.px_tree1 > span {
+	top: 196px;
+	left: 230px;
+	width: 40px;
+	height: 77px;
+	background-position: 0 0;
+}
+
+.px_tree2 > span {
+	top: 184px;
+	left: 34px;
+	width: 46px;
+	height: 87px;
+	background-position: -250px -80px;
+}
+
+.px_cloud > span {
+	top: 144px;
+	left: 60px;
+	width: 48px;
+	height: 28px;
+	background-position: -50px 0;
+}
+
+.px_sun > span {
+	top: 55px;
+	left: 163px;
+	width: 26px;
+	height: 26px;
+	background-position: -110px 0;
+}
+
+.px_star1 > span {
+	top: 35px;
+	left: 167px;
+	width: 14px;
+	height: 14px;
+	background-position: -150px 0;
+}
+
+.px_star2 > span {
+	top: 90px;
+	left: 191px;
+	width: 12px;
+	height: 18px;
+	background-position: -170px 0;
+}
+
+.px_star3 > span {
+	top: 83px;
+	left: 98px;
+	width: 12px;
+	height: 14px;
+	background-position: -150px -20px;
+}
+
+.px_star4 > span {
+	top: 104px;
+	left: 136px;
+	width: 14px;
+	height: 21px;
+	background-position: -170px -20px;
+}
+
+.px_star5 > span {
+	top: 137px;
+	left: 213px;
+	width: 12px;
+	height: 12px;
+	background-position: -150px -40px;
+}
+
+.px_bird1 > span {
+	top: 149px;
+	left: 205px;
+	width: 30px;
+	height: 21px;
+	background-position: -50px -40px;
+}
+
+.px_bird2 > span {
+	top: 170px;
+	left: 226px;
+	width: 19px;
+	height: 18px;
+	background-position: -90px -40px;
+}
+
+.px_bird3 > span {
+	top: 178px;
+	left: 74px;
+	width: 19px;
+	height: 15px;
+	background-position: -120px -40px;
+}
+
+.px_elephant > span {
+	top: 157px;
+	left: 83px;
+	width: 141px;
+	height: 95px;
+	background-position: 0 -80px;
+}
+
+.px_people > span {
+	top: 86px;
+	left: 143px;
+	width: 74px;
+	height: 74px;
+	background-position: -190px 0;
+}
+
+.px_rocket > span {
+	top: 0;
+	left: 115px;
+	width: 48px;
+	height: 82px;
+	background-position: -150px -80px;
+}
+
+.px_smoke > span {
+	top: 70px;
+	left: 89px;
+	width: 48px;
+	height: 80px;
+	background-position: -200px -80px;
+}
+
+.px_land > span {
+	top: 240px;
+	left: 19px;
+	width: 262px;
+	height: 64px;
+	background-position: 0 -180px;
+}
+
+.px_text > span {
+	top: 315px;
+	left: 0;
+	width: 300px;
+	height: 45px;
+	background-position: 0 -250px;
+}
+
+/**
+ * Menus
+\* -------------------------------------------------------------- */
+
+nav {
+	ul {
+		height: 60px;
+		padding: 10px 0;
+		margin: 0 auto;
+		text-align: right;
+	}
+	li {
+		@include inline-block;
+		padding-left: u(1rem);
+		&.active {
+			> a {
+				color: $black;
+				&:hover {
+					text-decoration: none;
+				}
+			}
+		}
+	}
+	a {
+		color: $white;
+		line-height: 1;
+		font-weight: 500;
+		&.button {
+			color: $cs-primary;
+			background-color: $white;
+		}
+	}
+	&.main {
+		background: $cs-primary;
+		width: 100%;
+	}
+}
+
+//.no-touch {
+//	@include breakpoint(medium) {
+//	}
+//}
+
+/**
+ * Main
+\* -------------------------------------------------------------- */
+
+main {
+	width:100%;
+	height:100%;
+	background: $black;
+	overflow: hidden;
+	z-index: 20;
+
+	section {
+		width:100%;
+		height:100%;
+	}
+
+	.wrapper {
+		height: 100%;
+		padding: 50px 0 0;
+	}
+}
+
+.triangle {
+	position: absolute;
+	top: -30px;
+	width: 100%;
+	height: 30px;
+	overflow: hidden;
+
+	.l-triangle,
+	.r-triangle {
+		position: absolute;
+		top: 0;
+		width: 50%;
+		height: 30px;
+		background: $white;
+		&:before {
+			position: absolute;
+			content: "";
+			top: 0;
+			width: 0;
+			height: 0;
+			border-bottom: 30px solid $white;
+		}
+	}
+}
+
+.l-triangle {
+	left: -40px;
+	&:before {
+		left: 100%;
+		border-right: 40px solid transparent;
+	}
+}
+
+.r-triangle {
+	right: -40px;
+	&:before {
+		right: 100%;
+		border-left: 40px solid transparent;
+	}
+}
+
+section {
+	text-align: center;
+	color: $white;
+	h1,
+	h3,
+	p {
+		color: $white;
+	}
+	header {
+		width: 100%;
+	}
+
+	.scene {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	&.one {
+	}
+
+	&.two {
+		background: lightskyblue;
+		.l-triangle,
+		.r-triangle {
+			background: lightskyblue;
+			&:before {
+				border-bottom-color: lightskyblue;
+			}
+		}
+
+		.land {
+			width: 720px;
+			height: 400px;
+			margin: 40px auto 0;
+			background: url(../img/map_1.png) no-repeat;
+			@include background-size(720px 570px);
+			@include breakpoint(retina) {
+				background-image: url(../img/img_sprite_2x.png);
+			}
+			background-position: 0 -170px;
+		}
+	}
+
+	&.three {
+		background: palegreen;
+		.l-triangle,
+		.r-triangle {
+			background: palegreen;
+			&:before {
+				border-bottom-color: palegreen;
+			}
+		}
+	}
+
+	&.four {
+		background: palevioletred;
+		.l-triangle,
+		.r-triangle {
+			background: palevioletred;
+			&:before {
+				border-bottom-color: palevioletred;
+			}
+		}
+	}
+}
+
+.cards {
+	position: relative;
+	width: 660px;
+	height: 450px;
+	margin: 0 auto;
+//	background: darkcyan;
+}
+
+.card {
+	display: block;
+	position: absolute;
+	bottom: 0;
+	background: tint($black, 5%);
+	width: 200px;
+	padding: 200px 0 10px;
+	margin: 10px;  z-index: 9;
+	&:before {
+		content: "";
+		position: absolute;
+		top: 20px;
+		left: 20px;
+		display: block;
+		width: 160px;
+		height: 160px;
+		background: url(../img/map_1.png) no-repeat;
+		@include background-size(720px 570px);
+		@include breakpoint(retina) {
+			background-image: url(../img/map_1.png);
+		}
+	}
+
+	&.charities,
+	&.match {
+		left: 50%;
+		margin-left: -100px;
+		z-index: 10;
+		&:before {
+			background-position: 0 0;
+		}
+	}
+
+	&.match {
+		opacity: 0;
+		z-index: 11;
+		&:before {
+			background: transparent;
+		}
+	}
+
+	&.professionals {
+		left: 0;
+		&:before {
+			background-position: -330px 0;
+		}
+	}
+
+	&.companies {
+		right: 0;
+		&:before {
+			background-position: -165px 0;
+		}
+	}
+}
+
+/**
+ * Imports
+\* -------------------------------------------------------------- */
+
+@import "custom/page-categories";

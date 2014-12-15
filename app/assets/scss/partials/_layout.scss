@@ -1,0 +1,375 @@
+/* ================================================================== *\
+   Layout ($layout)
+\* ================================================================== */
+
+/**
+ * Areas ($areas)
+\* -------------------------------------------------------------- */
+
+/* 100% width strip */
+.strip {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  list-style: none;
+
+  .wrapper {
+    padding: u(1rem) 0;
+
+    /* Remove bottom margin of the last element inside a strip wrapper */
+    > *:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  @include breakpoint(small) {
+    .wrapper {
+      padding: u(2rem) 0;
+    }
+  }
+}
+
+.wrapper {
+  position: relative;
+  margin: 0 auto;
+  max-width: u(90rem);//u(64rem); /* 1024px */
+  width: 90%;
+  overflow: hidden;
+}
+
+/**
+ * Column Layout
+ *  .wrapper.[ side-[ left | right ] | three-cols ]
+ * 		.col-[ left | mid | right ]
+ * 			.col-[ 1 | 2 | 3 ]
+ * 				.wrapper.[ side-[ left | right ] | three-cols ]
+ * 					.col-[ left | mid | right ]
+ * 						.col-[ 1 | 2 | 3 ]
+ * 	etc.
+\* -------------------------------------------------------------- */
+
+.holygrail {
+  position: relative;
+  margin: 0 auto;
+  max-width: u(90rem);//u(64rem); /* 1024px */
+  width: 100%;
+  overflow: hidden;
+}
+
+.col-right,
+.col-mid,
+.col-left {
+  float: left;
+  position: relative;
+  width: 100%;
+  margin: 0;
+}
+
+.col-1,
+.col-2,
+.col-3 {
+  float: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.col-1 {
+  overflow: visible;
+}
+
+/* Island and wells */
+
+.island,
+.well {
+  margin: 0 0 u($base-rem-unit);
+}
+
+.island {
+  padding: u($base-rem-unit);
+  background: $gray-lighter;
+}
+
+.well {
+  padding: u($base-rem-unit);
+  background: $gray-lighter;
+  box-shadow: inset 0 0 u(0.5rem) hsla(0, 0%, 0%, 0.15);
+}
+
+.island .island,
+.well .well {
+  background: $gray-light;
+}
+
+/**
+ * Grids ($grids)
+ * Includes verbose and shorthand methods
+ * 1. Default gutter width, change if desired
+ * 2. Remove `list-style` in case `.grid` is on a <ul> element
+ * 3. Hack to remove `inline-block` whitespace - http://cbrac.co/16xcjcl
+\* -------------------------------------------------------------- */
+
+.grid {
+  margin: 0;
+  margin-left: -(u($grid-rem-gutter)); /* 1 */
+  padding: 0;
+  list-style: none;           /* 2 */
+  font-size: 0;               /* 3 */
+}
+
+/* Grid gutters */
+.grid-gutter-none              { margin-left: 0;                   }
+.grid-gutter-none .grid-item   { padding-left: 0;                  }
+.grid-gutter-half              { margin-left: -(u($grid-rem-gutter / 2)); }
+.grid-gutter-half .grid-item   { padding-left: u($grid-rem-gutter / 2);   }
+.grid-gutter-double            { margin-left: -(u($grid-rem-gutter * 2)); }
+.grid-gutter-double .grid-item { padding-left: u($grid-rem-gutter * 2);   }
+
+/**
+ * Grid items
+ * 1. Default gutter width, change if desired
+ * 2. Ensures elements within `.grid-item` start at the top
+ * 3. Reset `font-size` back to normal
+\* -------------------------------------------------------------- */
+
+.grid-item {
+  @include inline-block;
+  padding-left: u($grid-rem-gutter); /* 1 */
+  vertical-align: top;        /* 2 */
+  font-size: $base-font-size; /* 3 */
+}
+
+/* Widths */
+.grid-item,
+.one-whole     { width: 0%;    }
+.one-half      { width: 0%;     }
+.one-third     { width: 33.333%; }
+.two-thirds    { width: 66.666%; }
+.one-fourth    { width: 25%;     }
+.two-fourths   { width: 50%;     }
+.three-fourths { width: 75%;     }
+.one-fifth     { width: 20%;     }
+.two-fifths    { width: 40%;     }
+.three-fifths  { width: 60%;     }
+.four-fifths   { width: 80%;     }
+.one-sixth     { width: 16.666%; }
+.two-sixths    { width: 33.333%; }
+.three-sixths  { width: 50%;     }
+.four-sixths   { width: 66.666%; }
+.five-sixths   { width: 83.333%; }
+.width-auto    { width: auto;    }
+
+/* Small-sized breakpoint */
+@include breakpoint(small) {
+  /* Grid gutters */
+  .small-grid-gutter-none              { margin-left: 0;                   }
+  .small-grid-gutter-none .grid-item   { padding-left: 0;                  }
+  .small-grid-gutter-half              { margin-left: -(u($grid-rem-gutter / 2)); }
+  .small-grid-gutter-half .grid-item   { padding-left: u($grid-rem-gutter / 2);   }
+  .small-grid-gutter-whole             { margin-left: -(u($grid-rem-gutter));     }
+  .small-grid-gutter-whole .grid-item  { padding-left: u($grid-rem-gutter);       }
+  .small-grid-gutter-double            { margin-left: -(u($grid-rem-gutter * 2)); }
+  .small-grid-gutter-double .grid-item { padding-left: u($grid-rem-gutter * 2);   }
+
+  /* Widths */
+  .small-one-whole      { width: 0%;    }
+  .small-one-half       { width: 0%;     }
+  .small-one-third      { width: 0%; }
+  .small-two-thirds     { width: 66.666%; }
+  .small-one-fourth     { width: 0%;     }
+  .small-three-fourths  { width: 75%;     }
+  .small-one-fifth      { width: 0%;     }
+  .small-two-fifths     { width: 40%;     }
+  .small-three-fifths   { width: 60%;     }
+  .small-four-fifths    { width: 80%;     }
+  .small-one-sixth      { width: 0%; }
+  .small-two-sixths     { width: 33.333%; }
+  .small-three-sixths   { width: 50%;     }
+  .small-four-sixths    { width: 66.666%; }
+  .small-five-sixths    { width: 83.333%; }
+  .small-width-auto     { width: auto;    }
+}
+
+/* Medium-sized breakpoint */
+@include breakpoint(medium) {
+  /* Grid gutters */
+  .medium-grid-gutter-none              { margin-left: 0;                   }
+  .medium-grid-gutter-none .grid-item   { padding-left: 0;                  }
+  .medium-grid-gutter-half              { margin-left: -(u($grid-rem-gutter / 2)); }
+  .medium-grid-gutter-half .grid-item   { padding-left: u($grid-rem-gutter / 2);   }
+  .medium-grid-gutter-whole             { margin-left: -(u($grid-rem-gutter));     }
+  .medium-grid-gutter-whole .grid-item  { padding-left: u($grid-rem-gutter);       }
+  .medium-grid-gutter-double            { margin-left: -(u($grid-rem-gutter * 2)); }
+  .medium-grid-gutter-double .grid-item { padding-left: u($grid-rem-gutter * 2);   }
+
+  /* Widths */
+  .medium-one-whole      { width: 100%;    }
+  .medium-one-half       { width: 50%;     }
+  .medium-one-third      { width: 33.333%; }
+  .medium-two-thirds     { width: 66.666%; }
+  .medium-one-fourth     { width: 25%;     }
+  .medium-three-fourths  { width: 75%;     }
+  .medium-one-fifth      { width: 20%;     }
+  .medium-two-fifths     { width: 40%;     }
+  .medium-three-fifths   { width: 60%;     }
+  .medium-four-fifths    { width: 80%;     }
+  .medium-one-sixth      { width: 16.666%; }
+  .medium-two-sixths     { width: 33.333%; }
+  .medium-three-sixths   { width: 50%;     }
+  .medium-four-sixths    { width: 66.666%; }
+  .medium-five-sixths    { width: 83.333%; }
+  .medium-width-auto     { width: auto;    }
+}
+
+/* Large-sized breakpoint */
+@include breakpoint(large) {
+  /* Grid gutters */
+  .large-grid-gutter-none              { margin-left: 0;                   }
+  .large-grid-gutter-none .grid-item   { padding-left: 0;                  }
+  .large-grid-gutter-half              { margin-left: -(u($grid-rem-gutter / 2)); }
+  .large-grid-gutter-half .grid-item   { padding-left: u($grid-rem-gutter / 2);   }
+  .large-grid-gutter-whole             { margin-left: -(u($grid-rem-gutter));     }
+  .large-grid-gutter-whole .grid-item  { padding-left: u($grid-rem-gutter);       }
+  .large-grid-gutter-double            { margin-left: -(u($grid-rem-gutter * 2)); }
+  .large-grid-gutter-double .grid-item { padding-left: u($grid-rem-gutter * 2);   }
+
+  /* Widths */
+  .large-one-whole     { width: 100%;    }
+  .large-one-half      { width: 50%;     }
+  .large-one-third     { width: 33.333%; }
+  .large-two-thirds    { width: 66.666%; }
+  .large-one-fourth    { width: 25%;     }
+  .large-three-fourths { width: 75%;     }
+  .large-one-fifth     { width: 20%;     }
+  .large-two-fifths    { width: 40%;     }
+  .large-three-fifths  { width: 60%;     }
+  .large-four-fifths   { width: 80%;     }
+  .large-one-sixth     { width: 16.666%; }
+  .large-two-sixths    { width: 33.333%; }
+  .large-three-sixths  { width: 50%;     }
+  .large-four-sixths   { width: 66.666%; }
+  .large-five-sixths   { width: 83.333%; }
+  .large-width-auto    { width: auto;    }
+}
+
+/* Huge-sized breakpoint */
+@include breakpoint(huge) {
+  /* Grid gutters */
+  .huge-grid-gutter-none              { margin-left: 0;                   }
+  .huge-grid-gutter-none .grid-item   { padding-left: 0;                  }
+  .huge-grid-gutter-half              { margin-left: -(u($grid-rem-gutter / 2)); }
+  .huge-grid-gutter-half .grid-item   { padding-left: u($grid-rem-gutter / 2);   }
+  .huge-grid-gutter-whole             { margin-left: -(u($grid-rem-gutter));     }
+  .huge-grid-gutter-whole .grid-item  { padding-left: u($grid-rem-gutter);       }
+  .huge-grid-gutter-double            { margin-left: -(u($grid-rem-gutter * 2)); }
+  .huge-grid-gutter-double .grid-item { padding-left: u($grid-rem-gutter * 2);   }
+
+  /* Widths */
+  .huge-one-whole     { width: 100%;    }
+  .huge-one-half      { width: 50%;     }
+  .huge-one-third     { width: 33.333%; }
+  .huge-two-thirds    { width: 66.666%; }
+  .huge-one-fourth    { width: 25%;     }
+  .huge-three-fourths { width: 75%;     }
+  .huge-one-fifth     { width: 20%;     }
+  .huge-two-fifths    { width: 40%;     }
+  .huge-three-fifths  { width: 60%;     }
+  .huge-four-fifths   { width: 80%;     }
+  .huge-one-sixth     { width: 16.666%; }
+  .huge-two-sixths    { width: 33.333%; }
+  .huge-three-sixths  { width: 50%;     }
+  .huge-four-sixths   { width: 66.666%; }
+  .huge-five-sixths   { width: 83.333%; }
+  .huge-width-auto    { width: auto;    }
+}
+
+/**
+ * Floats ($floats)
+\* -------------------------------------------------------------- */
+
+.float-left   { float: left;  }
+.float-right  { float: right; }
+.float-none   { float: none;  }
+
+/* Small-sized breakpoint */
+@include breakpoint(small) {
+  .small-float-left   { float: left;  }
+  .small-float-right  { float: right; }
+  .small-float-none   { float: none;  }
+}
+
+/* Medium-sized breakpoint */
+@include breakpoint(medium) {
+  .medium-float-left   { float: left;  }
+  .medium-float-right  { float: right; }
+  .medium-float-none   { float: none;  }
+}
+
+/* Large-sized breakpoint */
+@include breakpoint(large) {
+  .large-float-left   { float: left;  }
+  .large-float-right  { float: right; }
+  .large-float-none   { float: none;  }
+}
+
+/**
+ * Clearfix
+\* -------------------------------------------------------------- */
+
+/* Clear floats with an extra markup element - http://cbrac.co/SFv1Ua */
+.clear {
+  display: block;
+  visibility: hidden;
+  clear: both;
+  overflow: hidden;
+  width: 0;
+  height: 0;
+}
+
+/* Clearfix to contain floats */
+.cf {
+  &:before,
+  &:after {
+    display: table; /* 1 */
+    content: " ";   /* 2 */
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+/**
+ * Show/hide ($show-hide)
+\* -------------------------------------------------------------- */
+
+/**
+ * Hide only visually, but have it available for screenreaders -
+ * http://cbrac.co/TUcUgH
+ */
+
+.visuallyhidden {
+  position: absolute;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  margin: -(u(.0625rem));
+  padding: 0;
+  width: u(.0625rem);
+  height: u(.0625rem);
+  border: 0;
+
+  /**
+   * Extends the `.visuallyhidden` class to allow the element to be
+   * focusable when navigated to via the keyboard - http://cbrac.co/RR8gO6
+   */
+
+  &.focusable:active,
+  &.focusable:focus {
+    position: static;
+    overflow: visible;
+    clip: auto;
+    margin: 0;
+    width: auto;
+    height: auto;
+  }
+}
+

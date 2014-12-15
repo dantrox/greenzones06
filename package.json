@@ -1,0 +1,20 @@
+{
+  "name": "greenzones-splash-page",
+  "description": "Greenzones Tasks",
+  "version": "1.0.0",
+  "author": {
+    "name": "Paul Ryley",
+    "email": "paul@greenzones.org",
+    "url": "http://greenzones.org"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "~0.6",
+    "grunt-contrib-compass": "^1.0.1",
+    "grunt-contrib-concat": "~0.5",
+    "grunt-contrib-jshint": "~0.10",
+    "grunt-contrib-uglify": "~0.6",
+    "grunt-contrib-watch": "~0.6",
+    "grunt-jsbeautifier": "~0.2"
+  }
+}

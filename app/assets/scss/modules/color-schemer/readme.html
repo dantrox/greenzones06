@@ -1,0 +1,145 @@
+<h1>Color Schemer <a href="http://badge.fury.io/rb/color-schemer"><img src="https://badge.fury.io/rb/color-schemer.png" alt="Gem Version" /></a></h1>
+
+<h4>Color schemes made easy with Sass</h4>
+
+<p>Color schemer is a robust color toolset for Sass. It expands on the existing <a href="http://sass-lang.com/docs/yardoc/Sass/Script/Functions.html">Sass color functions</a> and adds things like RYB manipulation, * set-hue, * set-lightness, tint, shade and more. It also leverages these tools adding a full-featured color scheming tool that allows you to set one primary color and create whole color schemes around it.</p>
+
+<h2>Install</h2>
+
+<p><code>gem install color-schemer</code> in your terminal.</p>
+
+<p><code>require 'color-schemer'</code> to your Compass config file.</p>
+
+<p><code>@import 'color-schemer'</code> to your stylesheet.</p>
+
+<h3>Using Color Schemer</h3>
+
+<h2>New color functions</h2>
+
+<ul>
+<li><code>tint($color, $amount)</code> — Mixes the color with white. Most designers are much more comfortable with this than <code>lighten()</code>.</li>
+<li><code>shade($color, $amount)</code> — Same as above but adds black. Designers might prefer it over <code>darken()</code>.</li>
+<li><code>equalize($color)</code> — Returns a fully saturated color.</li>
+<li><code>set-red($color, $red)</code> — Sets the amount of red in a color.</li>
+<li><code>set-green($color, $green)</code> — Sets the amount of green in a color.</li>
+<li><code>set-blue($color, $blue)</code> — Sets the amount of blue in a color.</li>
+<li><code>set-hue($color, $hue)</code> — Sets the hue of a color.</li>
+<li><code>set-saturation($color, $saturation)</code> — Sets the saturation of a color.</li>
+<li><code>set-lightness($color, $lightness)</code> — Sets the lightness of a color.</li>
+<li><code>set-alpha($color, $alpha)</code> — Sets the alpha of a color.</li>
+</ul>
+
+
+<h4>RYB color functions</h4>
+
+<p>Color schemer adds a number of functions to manipulate the red yellow and blue color wheel. Computer color is calculated in red green and blue which is more technically correct but artists and designers have been using RYB for ages to come up with better color relationships.</p>
+
+<ul>
+<li><code>ryb-hue($color)</code> — Will find the hue of a color on the RYB color wheel.</li>
+<li><code>set-ryb-hue($color, $hue)</code> — Sets the hue of a color based on the RYB color wheel.</li>
+<li><code>ryb-adjust-hue($color, $degrees)</code> — Will adjust the hue of a color around the RYB color wheel.</li>
+<li><code>ryb-complement($color)</code> — Finds the RYB complement of a color.</li>
+<li><code>ryb-invert($color)</code> — Inverts a color around the RYB color wheel.</li>
+</ul>
+
+
+<h4>CMYK color function</h4>
+
+<ul>
+<li><code>cmyk($cyan, $magenta, $yellow, $black)</code> — Define colors using CMYK values.</li>
+</ul>
+
+
+<h2>Color scheming</h2>
+
+<h4>functions</h4>
+
+<p>Drop these functions in wherever you want to use a color from the scheme. You can manipulate them further to make them work with your design. These should be considered a good starting point as you might want to tweak a little further.</p>
+
+<ul>
+<li><code>cs-primary()</code> — primary color.</li>
+<li><code>cs-secondary()</code> — secondary color.</li>
+<li><code>cs-tertiary()</code> — tertiary color.</li>
+<li><code>cs-quadrary()</code> — quadrary color.</li>
+</ul>
+
+
+<h4>Variables</h4>
+
+<p>You can change the result of the functions above by setting these global variables:</p>
+
+<ul>
+<li><code>$cs-primary</code> — set the primary color in a color scheme.</li>
+<li><code>$cs-scheme</code> — mono, complement, triad, tetrad, analogic, accented-analogic</li>
+<li><code>$cs-hue-offset</code> — Amount of hue adjustment in schemes.</li>
+<li><code>$cs-brightness-offset</code> — Amount of brightness adjustment in schemes.</li>
+<li><code>$cs-color-model</code> — rgb, ryb</li>
+</ul>
+
+
+<h4>Blend modes</h4>
+
+<p>Color schemer includes <a href="https://github.com/heygrady/scss-blend-modes">SCSS Blend Modes</a> which allows you to do photoshop style blending of colors.</p>
+
+<h4>Out of the box</h4>
+
+<p>While you <em>can</em> use these functions out of the box you might want to fine-tune them a bit more. I suggest you create variables with them just in case you want to make adjustments/move things around instead of relying on these as-is.</p>
+
+<p><code>scss
+$primary: cs-primary();
+$secondary: darken(cs-secondary(), 10%); // too light, darkening this up a bit.
+$tertiary: cs-tertiary();
+$quadrary: cs-quadrary();
+</code></p>
+
+<h2>Testing your color scheme</h2>
+
+<p>Also included is a handy mixin to test out color schemes. Just include it with a list of your colors and it will add a bar of color above your page.</p>
+
+<p><code>scss
+@include cs-test(red green blue);
+</code></p>
+
+<h2>Inspiration</h2>
+
+<ul>
+<li>http://colorschemedesigner.com/</li>
+</ul>
+
+
+<h1>Research</h1>
+
+<p>Links and inspiraiton</p>
+
+<h3>General</h3>
+
+<ul>
+<li><a href="http://ianstormtaylor.com/design-tip-never-use-black/">Never use black</a></li>
+</ul>
+
+
+<h3>Color Mixing</h3>
+
+<ul>
+<li><a href="http://www.fastcompany.com/3002676/magical-tech-behind-paper-ipads-color-mixing-perfection">The Magical Tech Behind Paper For iPad&rsquo;s Color-Mixing Perfection</a></li>
+<li><a href="http://colorschemedesigner.com/">Color scheme designer</a></li>
+</ul>
+
+
+<h3>Color Blindness</h3>
+
+<ul>
+<li><a href="http://www.pcgamer.com/2013/02/01/why-games-need-color-blind-modes-see-simcity-with-simulated-color-blindness/">Why games need color blind modes – see SimCity with simulated color blindness</a></li>
+<li><a href="http://michelf.ca/projects/sim-daltonism/">Sim Daltonism app</a></li>
+</ul>
+
+
+<h2>License</h2>
+
+<p>Copyright &copy; 2011 <a href="http://www.scottkellum.com/">Scott Kellum</a> (<a href="http://twitter.com/scottkellum">@scottkellum</a>) and <a href="http://thecodingdesigner.com/">Mason Wendell</a> (<a href="http://twitter.com/canarymason">@canarymason</a>)</p>
+
+<p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the &ldquo;Software&rdquo;), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
+
+<p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
+
+<p>THE SOFTWARE IS PROVIDED &ldquo;AS IS&rdquo;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>

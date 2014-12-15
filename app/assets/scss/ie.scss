@@ -1,0 +1,77 @@
+
+$ie: true;
+
+@import "modules/functions";
+@import "modules/mixins";
+@import "modules/blend-modes";
+@import "modules/color-schemer";
+
+@import "config";						// Global variables used in the project
+
+@import "partials/normalise";			// Normalize all HTML elements
+@import "partials/base";				// Lay the foundation
+
+@import "vendor/magnific-popup";		// magnific-popup
+@import "vendor/responsive-nav";		// responsive-nav
+
+@import "partials/typography";			// Core styling for typography elements
+@import "partials/layout";				// Common layout items (grids, wrappers, etc.)
+@import "partials/forms";				// Styling for elements that make up a form
+@import "partials/buttons";				// States, sizes, and colors for buttons
+@import "partials/gemini";				// Custom styles go here!
+
+// IE override styles
+
+img {
+  -ms-interpolation-mode: bicubic;
+}
+
+.wrapper {
+  width: u(45rem) !important;
+}
+
+.grid {
+  font-size: inherit;
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.grid-item {
+  display: block;
+  float: left;
+}
+
+/**
+ * Browsehappy
+\* -------------------------------------------------------------- */
+
+html.lt-ie8 {
+
+  margin-bottom: 0 !important;
+
+  .wrapper {
+    min-width: u(28.75rem);
+    max-width: u(28.75rem);
+  }
+
+  body > header,
+  main,
+  footer {
+    display: none !important;
+  }
+
+  .browsehappy {
+    p {
+      text-align: center;
+      font-size: u(0.875rem);
+      line-height: 1.5;
+      margin: u(2rem) 0;
+    }
+  }
+}

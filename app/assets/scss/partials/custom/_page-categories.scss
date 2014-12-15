@@ -1,0 +1,214 @@
+
+/**
+ * CSS3-only Hexagons Shapes
+ * http://www.queness.com/post/13901/create-beautiful-hexagon-shapes-with-pure-css3
+ * alt: http://wptips.ru/hexagon-cropped-image-sass-mixin/
+ * ref: http://hexnet.org/content/hexagonal-geometry
+ * ref: http://codepen.io/interdruper/pen/GrBEk
+ * ref (greyscale): http://stackoverflow.com/questions/16340159/greyscale-background-css-images
+ * ref (greyscale): http://www.majas-lapu-izstrade.lv/cross-browser-grayscale-image-example-using-css3-js-v2-0-with-browser-feature-detection-using-modernizr/
+\* -------------------------------------------------------------- */
+
+/* Customization vars */
+
+$hex_scale      : 1;		// Change this to resize the hexagons
+$images_scale   : 1.2;		// Change this to resize images inside hexagons
+$hex_padding    : 10px;		// padding between hexagons. Should be >=0
+
+$hex_base_width : 100px;
+$hex_icon_size  : 120;
+
+/* No changes needed from here */
+
+$hex_width      : $hex_scale * $hex_base_width;
+$hex_height     : round( $hex_width / 1.732050807568877293 );	// h=w/sqrt(3)
+$hex_margin_v   : $hex_height / 4 + $hex_padding / 2;
+$hex_margin_h   : $hex_padding / 2;
+
+.hexagons {
+	position: fixed;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	z-index: 1;
+//	background: rgba($white, .85);
+	> div {
+		margin: 140px auto 40px;
+		width: ($hex_width + $hex_padding) * 4;
+		@include breakpoint(small) {
+			width: ($hex_width + $hex_padding) * 6;
+		}
+	}
+}
+
+.hex {
+	float: left;
+	position: relative;
+	width: $hex_width;
+	height: $hex_height;
+	background-image: url(../img/icons_120_1x.png);
+	@include breakpoint(retina) {
+		background-image: url(../img/icons_120_2x.png);
+	}
+//	background-color: $gray-lightest;
+	background-repeat: no-repeat;
+	background-position: 0px 0px;
+	//@include background-size( auto round($hex_width * $images_scale) );
+	@include background-size( 480px 600px );
+	margin: round($hex_margin_v * $hex_scale) round($hex_margin_h * $hex_scale);
+	zoom: 1;
+//	-webkit-filter: grayscale(100%);
+//	   -moz-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+//	     -o-filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+//	        filter: gray;
+//	        filter: url("data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\'><filter id=\'grayscale\'><feColorMatrix type=\'matrix\' values=\'0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0.3333 0.3333 0.3333 0 0 0 0 0 1 0\'/></filter></svg>#grayscale");
+	@include opacity(.8);
+	@include transition(all .15s linear);
+
+	&:hover,
+	&.selected {
+	@include opacity(1);
+	-webkit-filter: none;
+	   -moz-filter: none;
+	     -o-filter: none;
+	        filter: none;
+	        filter: none;
+	}
+
+	&.tiny-2,
+	&.tiny-3,
+	&.tiny-4 {
+		clear: left;
+		&.no-clear {
+			clear: none;
+		}
+	}
+
+	&.tiny-2 {margin-left: round(($hex_margin_h * $hex_scale * 3) + ($hex_width / 2) * 2)}
+	&.tiny-3 {margin-left: round(($hex_margin_h * $hex_scale * 2) + ($hex_width / 2) * 1)}
+	&.tiny-4 {margin-left: round(($hex_margin_h * $hex_scale * 1) + ($hex_width / 2) * 0)}
+
+	@include breakpoint(small) {
+		&.tiny-2,
+		&.tiny-3,
+		&.tiny-4 {
+			clear: none;
+			margin-left: round($hex_margin_h * $hex_scale);
+		}
+
+		&.small-2,
+		&.small-5,
+		&.small-6 {
+			clear: left;
+		}
+
+		&.small-2 {margin-left: round(($hex_margin_h * $hex_scale * 5) + ($hex_width / 2) * 4)}
+		&.small-5 {margin-left: round(($hex_margin_h * $hex_scale * 2) + ($hex_width / 2) * 1)}
+		&.small-6 {margin-left: round(($hex_margin_h * $hex_scale * 1) + ($hex_width / 2) * 0)}
+	}
+
+	a {
+		display:block;
+		position:absolute;
+		top:0;
+		left:0;
+		width: 100%;
+		height:100%;
+		text-indent:-9999em;
+	}
+
+	.corner-1,
+	.corner-2 {
+		position: absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+		background: inherit;
+		overflow:hidden;
+		@include backface-visibility(hidden);
+		z-index:-2;
+
+		&:before {
+			position: absolute;
+			top:0;
+			left: 0;
+			width: $hex_width;
+			height:	$hex_height * 2;
+			content: '';
+			background: inherit;
+			background-position: -8px 0;
+			background-repeat:no-repeat;
+			@include backface-visibility(hidden);
+			z-index: 1;
+		}
+	}
+
+	.corner-1 {
+		z-index:-1;
+		@include transform( rotate(60deg) );
+
+		&:before {
+			@include transform( rotate(-60deg) translate(-$hex_width / 2, 0) );
+			@include transform-origin( 0 0 );
+		}
+	}
+
+	.corner-2 {
+		@include transform( rotate(-60deg) );
+
+		&:before {
+			bottom: 0;
+			@include transform( rotate(60deg) translate(-$hex_width / 4, -$hex_height / 4) );
+		}
+	}
+}
+
+.hex-1  {background-position:  #{$hex_icon_size * 0 - 10}px  #{$hex_icon_size * 0 - 31}px}
+.hex-2  {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 1 + 31}px}
+.hex-3  {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 2 + 31}px}
+.hex-4  {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 3 + 31}px}
+.hex-5  {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 4 + 31}px}
+
+.hex-6  {background-position: -#{$hex_icon_size * 1 + 10}px  #{$hex_icon_size * 0 - 31}px}
+.hex-7  {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 1 + 31}px}
+.hex-8  {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 2 + 31}px}
+.hex-9  {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 3 + 31}px}
+.hex-10 {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 4 + 31}px}
+
+.hex-11 {background-position: -#{$hex_icon_size * 2 + 10}px  #{$hex_icon_size * 0 - 31}px}
+.hex-12 {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 1 + 31}px}
+.hex-13 {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 2 + 31}px}
+.hex-14 {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 3 + 31}px}
+.hex-15 {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 4 + 31}px}
+
+.hex-16 {background-position: -#{$hex_icon_size * 3 + 10}px  #{$hex_icon_size * 0 - 31}px}
+.hex-17 {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 1 + 31}px}
+.hex-18 {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 2 + 31}px}
+.hex-19 {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 3 + 31}px}
+.hex-20 {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 4 + 31}px}
+
+.hex-1 .corner-1:before, .hex-1 .corner-2:before   {background-position:  #{$hex_icon_size * 0 - 10}px  #{$hex_icon_size * 0 - 2}px}
+.hex-2 .corner-1:before, .hex-2 .corner-2:before   {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 1 + 2}px}
+.hex-3 .corner-1:before, .hex-3 .corner-2:before   {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 2 + 2}px}
+.hex-4 .corner-1:before, .hex-4 .corner-2:before   {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 3 + 2}px}
+.hex-5 .corner-1:before, .hex-5 .corner-2:before   {background-position:  #{$hex_icon_size * 0 - 10}px -#{$hex_icon_size * 4 + 2}px}
+
+.hex-6 .corner-1:before, .hex-6 .corner-2:before   {background-position: -#{$hex_icon_size * 1 + 10}px  #{$hex_icon_size * 0 - 2}px}
+.hex-7 .corner-1:before, .hex-7 .corner-2:before   {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 1 + 2}px}
+.hex-8 .corner-1:before, .hex-8 .corner-2:before   {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 2 + 2}px}
+.hex-9 .corner-1:before, .hex-9 .corner-2:before   {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 3 + 2}px}
+.hex-10 .corner-1:before, .hex-10 .corner-2:before {background-position: -#{$hex_icon_size * 1 + 10}px -#{$hex_icon_size * 4 + 2}px}
+
+.hex-11 .corner-1:before, .hex-11 .corner-2:before {background-position: -#{$hex_icon_size * 2 + 10}px  #{$hex_icon_size * 0 - 2}px}
+.hex-12 .corner-1:before, .hex-12 .corner-2:before {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 1 + 2}px}
+.hex-13 .corner-1:before, .hex-13 .corner-2:before {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 2 + 2}px}
+.hex-14 .corner-1:before, .hex-14 .corner-2:before {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 3 + 2}px}
+.hex-15 .corner-1:before, .hex-15 .corner-2:before {background-position: -#{$hex_icon_size * 2 + 10}px -#{$hex_icon_size * 4 + 2}px}
+
+.hex-16 .corner-1:before, .hex-16 .corner-2:before {background-position: -#{$hex_icon_size * 3 + 10}px  #{$hex_icon_size * 0 - 2}px}
+.hex-17 .corner-1:before, .hex-17 .corner-2:before {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 1 + 2}px}
+.hex-18 .corner-1:before, .hex-18 .corner-2:before {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 2 + 2}px}
+.hex-19 .corner-1:before, .hex-19 .corner-2:before {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 3 + 2}px}
+.hex-20 .corner-1:before, .hex-20 .corner-2:before {background-position: -#{$hex_icon_size * 3 + 10}px -#{$hex_icon_size * 4 + 2}px}
